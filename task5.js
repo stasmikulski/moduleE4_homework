@@ -1,4 +1,4 @@
-class MyDevice{
+class MyDevice {
     constructor(name) {
         this.name = name;
     }
