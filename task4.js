@@ -2,7 +2,7 @@ function MyDevice(name) {
     this.name = name;
 }
 
-MyDevice.prototype.DeviceWork = function () {
+MyDevice.prototype.deviceWork = function () {
     let work = false
     if (this.electric && this.poweron) {
         work = true;
@@ -53,7 +53,7 @@ AccumCharger.prototype = new MyDevice();
 let sumPower = function(){
     let sum = 0;
     for ( let consumer of allMyElectricConsumers ) {
-        if (consumer.DeviceWork()){
+        if (consumer.deviceWork()){
             sum += consumer.power;
         } else {
             sum;

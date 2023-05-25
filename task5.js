@@ -15,7 +15,7 @@ class ElectricDevice extends MyDevice {
         }
     }
 
-    DeviceWork() {
+    deviceWork() {
         let work = false
         if (this.electric && this.poweron) {
             work = true;
@@ -56,7 +56,7 @@ class AccumCharger extends ElectricDevice {
 let sumPower = function(){
     let sum = 0;
     for ( let consumer of allMyElectricConsumers ) {
-        if (consumer.DeviceWork()){
+        if (consumer.deviceWork()){
             sum += consumer.power;
         } else {
             sum;
