@@ -104,12 +104,12 @@ const electrokamin = new ElectricDevice(
     false
 );
 const white3Usb = new AccumCharger(
-    name = "3хUSB Charger",
-    power = 15,
-    electric = true,
-    poweron = true,
-    voltage = 220,
-    amperage = 3
+    "3хUSB Charger",
+    15,
+    true,
+    true,
+    220,
+    3
 );
 
 
@@ -124,9 +124,11 @@ sumPowerMessage();
 // используем кнопку вкл/выкл (переключатель)
 lamp2.deviceSwitching();
 sumPowerMessage();
+
 // А белую USB-зарядку выключаем
 white3Usb.deviceSwitching();
 sumPowerMessage();
+
 // Вручную включим Электрокамин
 console.log('Manually switching ON my Electrokamin...');
 // используем ручное (точное и наглое) включение

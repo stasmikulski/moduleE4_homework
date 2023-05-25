@@ -117,9 +117,11 @@ sumPowerMessage();
 // используем кнопку вкл/выкл (переключатель)
 lamp2.deviceSwitching();
 sumPowerMessage();
+
 // А белую USB-зарядку выключаем
 white3Usb.deviceSwitching();
 sumPowerMessage();
+
 // Вручную включим Электрокамин
 console.log('Manually switching ON my Electrokamin...');
 // используем ручное (точное и наглое) включение
