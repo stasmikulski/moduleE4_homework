@@ -1,38 +1,42 @@
-function MyDevice(name) {
-    this.name = name;
-}
-
-MyDevice.prototype.DeviceWork = function () {
-    let work = false
-    if (this.electric && this.poweron) {
-        work = true;
-    } else {
-        work = false;
-    }
-    return (work);
-}
-
-MyDevice.prototype.deviceSwitching = function() {
-    if (this.poweron == true) {
-        this.poweron = false;
-        console.log(this.name + ': switching OFF')
-    } else {
-        this.poweron = true;
-        console.log(this.name + ': switching ON')
+class MyDevice{
+    constructor(name) {
+        this.name = name;
     }
 }
 
-function ElectricDevice(name, power, electric, poweron) {
-    this.name = name;
-    this.power = power;
-    this.electric = electric;
-    this.poweron = poweron;
-    this.showPower = function(){
-        console.log(power)
+class ElectricDevice extends MyDevice {
+    constructor(name, power, electric, poweron) {
+        super(name);
+        this.power = power;
+        this.electric = electric;
+        this.poweron = poweron;
+        this.showPower = function () {
+            console.log(power)
+        }
     }
+
+    DeviceWork() {
+        let work = false
+        if (this.electric && this.poweron) {
+            work = true;
+        } else {
+            work = false;
+        }
+        return work;
+    }
+
+    deviceSwitching() {
+        if (this.poweron == true) {
+            this.poweron = false;
+            console.log(this.name + ': switching OFF')
+        } else {
+            this.poweron = true;
+            console.log(this.name + ': switching ON')
+        }
+    }
+
 }
 
-ElectricDevice.prototype = new MyDevice();
 
 let sumPower = function(){
     let sum = 0;
@@ -45,6 +49,7 @@ let sumPower = function(){
     }
     return sum;
 }
+
 
 let sumPowerMessage = function () {
     console.log('* General Power: ' + sumPower(allMyElectricConsumers) + ' W');
@@ -60,25 +65,25 @@ let printListAllMyEC = function() {
 
 
 const lamp1 = new ElectricDevice(
-    name = "Chandelier",
-    power = 50,
-    electric = true,
-    poweron = true);
+    "Chandelier",
+    50,
+    true,
+    true);
 const lamp2 = new ElectricDevice(
-    name = "Bird LampShade",
-    power = 25,
-    electric = true,
-    poweron = false);
+    "Bird LampShade",
+    25,
+    true,
+    false);
 const ledline = new ElectricDevice(
-    name = "Led Line Gauss",
-    power = 20,
-    electric = true,
-    poweron = true);
+    "Led Line Gauss",
+    20,
+    true,
+    true);
 const electrokamin = new ElectricDevice(
-    name = "Electro Kamin",
-    power = 1500,
-    electric = true,
-    poweron = false);
+    "Electro Kamin",
+    1500,
+    true,
+    false);
 
 
 
