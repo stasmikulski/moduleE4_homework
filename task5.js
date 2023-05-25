@@ -29,14 +29,29 @@ class ElectricDevice extends MyDevice {
         if (this.poweron == true) {
             this.poweron = false;
             console.log(this.name + ': switching OFF')
+            console.log('-' + this.power)
         } else {
             this.poweron = true;
             console.log(this.name + ': switching ON')
+            console.log('+' + this.power)
+
         }
     }
 
 }
 
+
+class AccumCharger extends ElectricDevice {
+    constructor(name, power, electric, poweron, voltage, amperage ) {
+        super(name, power, electric, poweron);
+        this.voltage = voltage;
+        this.amperage = amperage;
+        this.showPower = function () {
+            console.log(power)
+        }
+    }
+
+}
 
 let sumPower = function(){
     let sum = 0;
@@ -68,58 +83,69 @@ const lamp1 = new ElectricDevice(
     "Chandelier",
     50,
     true,
-    true);
+    true
+);
 const lamp2 = new ElectricDevice(
     "Bird LampShade",
     25,
     true,
-    false);
+    false
+);
 const ledline = new ElectricDevice(
     "Led Line Gauss",
     20,
     true,
-    true);
+    true
+);
 const electrokamin = new ElectricDevice(
     "Electro Kamin",
     1500,
     true,
-    false);
+    false
+);
+const white3Usb = new AccumCharger(
+    name = "3хUSB Charger",
+    power = 15,
+    electric = true,
+    poweron = true,
+    voltage = 220,
+    amperage = 3
+);
 
 
-
-let allMyElectricConsumers = [lamp1, lamp2, ledline, electrokamin];
+let allMyElectricConsumers = [lamp1, lamp2, ledline, electrokamin, white3Usb];
 
 // Выведем список всех устройств
 printListAllMyEC();
 // И общую мощность
 sumPowerMessage();
 
+// Включаем Торшер-Птичку
+// используем кнопку вкл/выкл (переключатель)
+lamp2.deviceSwitching();
+sumPowerMessage();
+// А белую USB-зарядку выключаем
+white3Usb.deviceSwitching();
+sumPowerMessage();
 // Вручную включим Электрокамин
 console.log('Manually switching ON my Electrokamin...');
-// используем ручное точное и наглое включение
+// используем ручное (точное и наглое) включение
 electrokamin.poweron = true;
-electrokamin.showPower();
 sumPowerMessage();
 
 // Теперь выключим камин
 // можно просто нажать кнопку - electrokamin.deviceSwitching();
-// или, лучше, запустим таймер на несколько секунд
+// но, лучше, запустим таймер на несколько секунд
 let current = 3;
 let timerId = setInterval(function() {
-    console.log(current);
-    if (current == 0) {
+    console.log('...', current);
+    if (current == 1) {
         clearInterval(timerId);
         console.log('... that\'s enough'); // Погрелись и хватит
         // выключаем камин, используя кнопку вкл/выкл (переключатель)
         electrokamin.deviceSwitching();
         sumPowerMessage();
-        // После того как камин немного поработал, включим Торшер-Птичку
-        console.log('Bonus: switching ON my Bird LampShade...');
-        // тоже используем кнопку вкл/выкл (переключатель)
-        lamp2.deviceSwitching();
-        lamp2.showPower();
-        sumPowerMessage();
-        console.log('That\'s all, folks');
+        console.log('(That\'s all, folks!)');
     }
     current--;
 }, 1000);
